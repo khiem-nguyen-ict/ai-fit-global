@@ -1,0 +1,9 @@
+{
+  "name": "AI-Fit Global",
+  "description": "An MVP for a global AI fitness coach featuring real-time pose detection, squat counting, multi-language support, and location-aware workout recommendations.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation",
+    "microphone"
+  ]
+}
