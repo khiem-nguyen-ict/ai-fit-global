@@ -16,14 +16,15 @@ export const calculateAngle = (a: Point, b: Point, c: Point): number => {
   return angle;
 };
 
-// Squat Logic Constants
-export const SQUAT_DOWN_THRESHOLD = 95;
-export const SQUAT_UP_THRESHOLD = 160;
+// Squat Logic Constants (knee angle at hip-knee-ankle)
+// More lenient thresholds for easier detection
+export const SQUAT_DOWN_THRESHOLD = 120;  // Increased from 95 - detects squat earlier
+export const SQUAT_UP_THRESHOLD = 145;    // Decreased from 160 - detects standing earlier
 
-// Push-up Logic Constants (Elbow angle)
-export const PUSHUP_DOWN_THRESHOLD = 90;
-export const PUSHUP_UP_THRESHOLD = 160;
+// Push-up Logic Constants (Elbow angle at shoulder-elbow-wrist)
+export const PUSHUP_DOWN_THRESHOLD = 110; // Increased from 90 - detects down position easier
+export const PUSHUP_UP_THRESHOLD = 150;   // Decreased from 160 - detects up position easier
 
 // Lunge Logic Constants (Knee angle)
-export const LUNGE_DOWN_THRESHOLD = 100;
-export const LUNGE_UP_THRESHOLD = 160;
+export const LUNGE_DOWN_THRESHOLD = 120;  // Increased from 100 - detects lunge easier
+export const LUNGE_UP_THRESHOLD = 150;    // Decreased from 160 - detects standing easier

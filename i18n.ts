@@ -18,7 +18,7 @@ export const translations = {
     ready: "Ready",
     premium: "Premium",
     listening: "AI is listening...",
-    voiceCommands: "Try saying: 'Start', 'Stop', 'Squats', 'Push-ups'",
+    voiceCommands: "Click Start to begin",
     [ExerciseType.SQUAT]: "Squats",
     [ExerciseType.PUSH_UP]: "Push-ups",
     [ExerciseType.LUNGE]: "Lunges",
@@ -30,7 +30,14 @@ export const translations = {
     cmd_stop: ["stop", "pause", "finish"],
     cmd_squat: ["squat", "squats"],
     cmd_pushup: ["push up", "pushups", "push-up"],
-    cmd_lunge: ["lunge", "lunges"]
+    cmd_lunge: ["lunge", "lunges"],
+    encouragements: ["Nice!", "Great!", "Keep going!", "You got this!", "Awesome!", "Perfect!"],
+    milestone5: "Five reps! Keep pushing!",
+    milestone10: "Ten reps! You're on fire!",
+    milestone15: "Fifteen! Incredible!",
+    milestone20: "Twenty reps! You're a champion!",
+    milestone25: "Twenty-five! Unstoppable!",
+    workoutStart: "Let's go! Start your workout!"
   },
   [Language.VI]: {
     welcome: "AI-Fit Toàn Cầu",
@@ -48,7 +55,7 @@ export const translations = {
     ready: "Sẵn sàng",
     premium: "Premium",
     listening: "AI đang nghe...",
-    voiceCommands: "Hãy nói: 'Bắt đầu', 'Dừng lại', 'Hít đất', 'Squat'",
+    voiceCommands: "Ha4y nhấn 'Bắt đầu' để tập",
     [ExerciseType.SQUAT]: "Squat",
     [ExerciseType.PUSH_UP]: "Hít đất",
     [ExerciseType.LUNGE]: "Lunge",
@@ -60,7 +67,14 @@ export const translations = {
     cmd_stop: ["dừng", "dừng lại", "thôi", "nghỉ"],
     cmd_squat: ["squat", "sờ quát"],
     cmd_pushup: ["hít đất", "chống đẩy"],
-    cmd_lunge: ["lân", "lunge"]
+    cmd_lunge: ["lân", "lunge"],
+    encouragements: ["Tốt!", "Giỏi lắm!", "Tiếp tục!", "Cố lên!", "Tuyệt vời!", "Hoàn hảo!"],
+    milestone5: "Năm lần! Tiếp tục nào!",
+    milestone10: "Mười lần! Bạn đang cháy!",
+    milestone15: "Mười lăm! Tuyệt vời!",
+    milestone20: "Hai mươi lần! Bạn là nhà vô địch!",
+    milestone25: "Hai mươi lăm! Không thể ngăn cản!",
+    workoutStart: "Bắt đầu tập thôi!"
   },
   [Language.FI]: {
     welcome: "AI-Fit Globaali",
@@ -78,7 +92,7 @@ export const translations = {
     ready: "Valmis",
     premium: "Premium",
     listening: "AI kuuntelee...",
-    voiceCommands: "Sano: 'Aloita', 'Lopeta', 'Kyykky'",
+    voiceCommands: "Klikkaa: 'Aloita'",
     [ExerciseType.SQUAT]: "Kyykky",
     [ExerciseType.PUSH_UP]: "Punnerrus",
     [ExerciseType.LUNGE]: "Askelkyykky",
@@ -90,6 +104,13 @@ export const translations = {
     cmd_stop: ["lopeta", "seis"],
     cmd_squat: ["kyykky", "kyykkyjä"],
     cmd_pushup: ["punnerrus", "punnerruksia"],
-    cmd_lunge: ["askelkyykky"]
+    cmd_lunge: ["askelkyykky"],
+    encouragements: ["Hyvä!", "Mahtavaa!", "Jatka!", "Sä pystyt!", "Loistavaa!", "Täydellistä!"],
+    milestone5: "Viisi toistoa! Jatka samaan malliin!",
+    milestone10: "Kymmenen toistoa! Olet tulessa!",
+    milestone15: "Viisitoista! Uskomatonta!",
+    milestone20: "Kaksikymmentä toistoa! Olet mestari!",
+    milestone25: "Kaksikymmentäviisi! Pysäyttämätön!",
+    workoutStart: "Mennään! Aloita treeni!"
   }
 };

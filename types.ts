@@ -2,10 +2,7 @@
 export enum Language {
   EN = 'en',
   VI = 'vi',
-  FI = 'fi',
-  ES = 'es',
-  ZH = 'zh',
-  JA = 'ja'
+  FI = 'fi'
 }
 
 export enum ExerciseType {
@@ -18,7 +15,11 @@ export interface WeatherInfo {
   temp: number;
   condition: string;
   location: string;
+  city: string;
+  country: string;
   isCold: boolean;
+  humidity?: number;
+  windSpeed?: number;
 }
 
 export interface WorkoutState {
