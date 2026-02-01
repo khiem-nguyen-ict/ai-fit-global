@@ -55,7 +55,7 @@ export const translations = {
     ready: "Sẵn sàng",
     premium: "Premium",
     listening: "AI đang nghe...",
-    voiceCommands: "Ha4y nhấn 'Bắt đầu' để tập",
+    voiceCommands: "Hãy nhấn 'Bắt đầu' để tập",
     [ExerciseType.SQUAT]: "Squat",
     [ExerciseType.PUSH_UP]: "Hít đất",
     [ExerciseType.LUNGE]: "Lunge",
