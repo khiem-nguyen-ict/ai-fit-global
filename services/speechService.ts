@@ -61,8 +61,6 @@ export const speak = (text: string, lang: Language) => {
   lastSpokenText = text;
   lastSpokenTime = now;
   
-  console.log(`[TTS] Speaking: "${text}"`);
-  
   // Play a beep for numbers (countdown and rep counts)
   if (/^\d+$/.test(text)) {
     const num = parseInt(text);

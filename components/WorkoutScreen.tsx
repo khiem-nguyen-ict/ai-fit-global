@@ -22,6 +22,7 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
   const recognitionRef = useRef<any>(null);
   const poseRef = useRef<any>(null);
   const cameraRef = useRef<any>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   
   const [isActive, setIsActive] = useState(false);
   const [isCountingDown, setIsCountingDown] = useState(false);
@@ -306,6 +307,33 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
     if (isActive) speak(t[exercise], lang);
   }, [exercise, lang, isActive, t]);
 
+  // Control background music based on workout state
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    const audio = audioRef.current;
+    
+    if (isActive) {
+      // Small delay to ensure previous pause completes
+      const playTimeout = setTimeout(() => {
+        audio.play().catch(err => {
+          // Ignore if error is due to rapid pause/play
+          if (!err.message?.includes('interrupted')) {
+            console.log('Audio play error:', err);
+          }
+        });
+      }, 100);
+      
+      return () => clearTimeout(playTimeout);
+    } else {
+      // Pause and reset
+      if (!audio.paused) {
+        audio.pause();
+      }
+      audio.currentTime = 0;
+    }
+  }, [isActive]);
+
   const onResults = useCallback((results: any) => {
     if (!canvasRef.current || !videoRef.current) return;
     const canvasCtx = canvasRef.current.getContext('2d');
@@ -345,18 +373,22 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
       setWorkout(prev => {
         let newStatus = prev.status;
         let newReps = prev.reps;
+        let shouldSpeak = false;
+        let message = '';
 
         if (angle < downThresh && prev.status !== 'DOWN') {
           newStatus = 'DOWN';
-          speak(t.up, lang);
+          shouldSpeak = true;
+          message = t.up;
         } 
         
         if (angle > upThresh && prev.status === 'DOWN') {
           newStatus = 'UP';
           newReps += 1;
+          shouldSpeak = true;
           
-          // Speak the rep count with motivational feedback
-          let message = `${newReps}`;
+          // Prepare the rep count message
+          message = `${newReps}`;
           
           // Check for milestones
           if (newReps === 5) {
@@ -374,11 +406,14 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
             const encouragement = t.encouragements[Math.floor(Math.random() * t.encouragements.length)];
             message = `${newReps}. ${encouragement}`;
           }
-          
-          speak(message, lang);
         }
 
+        // Only speak if status actually changed
         if (newStatus !== prev.status || newReps !== prev.reps) {
+          if (shouldSpeak && message) {
+            // Speak only once per state change
+            speak(message, lang);
+          }
           return { ...prev, status: newStatus, reps: newReps };
         }
         return prev;
@@ -441,6 +476,20 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
 
   return (
     <div className="relative w-full flex-1 min-h-0 bg-black rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.6)] border-4 border-white/10 ring-1 ring-white/10 transition-all duration-700">
+      {/* Background Music */}
+      <audio 
+        ref={audioRef} 
+        loop 
+        preload="auto"
+        onLoadedData={() => {
+          if (audioRef.current) {
+            audioRef.current.volume = 0.3; // Set volume to 30%
+          }
+        }}
+      >
+        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
+      </audio>
+      
       {/* Video preview - visible when not active */}
       <video 
         ref={videoRef} 
@@ -542,7 +591,7 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
                 )}
                 
                 <p className="text-lg md:text-xl font-bold text-white/80 mb-8 uppercase drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-                  
+                  Say "Start" or click below
                 </p>
               </>
             )}
