@@ -53,8 +53,8 @@ const App: React.FC = () => {
           className="bg-white/10 border-2 border-white/20 text-white text-lg px-4 py-2 rounded-xl focus:ring-4 focus:ring-indigo-500 outline-none uppercase font-black tracking-tighter cursor-pointer appearance-none text-center shadow-xl"
         >
           <option value={Language.EN} className="bg-black">🇬🇧</option>
-          <option value={Language.VI} className="bg-black">🇫🇮</option>
-          <option value={Language.FI} className="bg-black">🇻🇳</option>
+          <option value={Language.FI} className="bg-black">🇫🇮</option>
+          <option value={Language.VI} className="bg-black">🇻🇳</option>
         </select>
       </header>
 

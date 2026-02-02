@@ -1,28 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI-Fit Global</title>
+    
+    <title>AI-Fit Global | Your AI Personal Trainer & Form Coach</title>
+    <meta name="title" content="AI-Fit Global | Your AI Personal Trainer & Form Coach" />
+    <meta name="description" content="Master your home workouts with AI-Fit Global. Real-time AI form correction, multi-language coaching (Finnish, Vietnamese, etc.), and personalized routines adapted to your climate." />
+    <meta name="keywords" content="AI Personal Trainer, Home Workout AI, MediaPipe Pose, Fitness App Finland, AI Fitness Coach Vietnam, Posture Correction App" />
+    <meta name="author" content="AI-Fit Global Team" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ai-fit-global.com/" />
+    <meta property="og:title" content="AI-Fit Global | Smart AI Training for Everyone" />
+    <meta property="og:description" content="Real-time AI pose tracking and personalized coaching in your pocket. Train smarter, not harder." />
+    <meta property="og:image" content="/og-image.jpg" /> <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://ai-fit-global.com/" />
+    <meta property="twitter:title" content="AI-Fit Global | Smart AI Training" />
+    <meta property="twitter:description" content="Your AI Personal Trainer with real-time feedback. Multi-language support included." />
+    <meta property="twitter:image" content="/og-image.jpg" />
+
+    <link rel="canonical" href="https://ai-fit-global.com/" />
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- MediaPipe Pose -->
+    
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <!-- ResponsiveVoice TTS - more reliable than native speechSynthesis -->
+    
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=free"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4"
-  }
-}
-</script>
-</head>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "react/": "https://esm.sh/react@^19.2.4/",
+        "react": "https://esm.sh/react@^19.2.4"
+      }
+    }
+    </script>
+  </head>
   <body class="bg-gray-900 text-white antialiased h-screen w-screen overflow-hidden m-0 p-0">
+    <h1 class="sr-only">AI-Fit Global - AI Powered Personal Training & Pose Tracking</h1>
+    
     <div id="root" class="h-full w-full"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
