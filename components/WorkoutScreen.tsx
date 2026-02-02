@@ -625,7 +625,7 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
                 )}
                 
                 <p className="text-lg md:text-xl font-bold text-white/80 mb-8 uppercase drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-                  Say "Start" or click below
+                  
                 </p>
               </>
             )}
