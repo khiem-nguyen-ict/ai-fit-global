@@ -75,12 +75,21 @@ export const getLocalWeather = async (): Promise<WeatherInfo> => {
         });
       }
     }, (err) => {
-      console.error("Geolocation error:", err);
+      console.error('Geolocation error:', err);
+      // Provide specific error messages
+      let errorMessage = 'Location unavailable';
+      if (err.code === 1) {
+        errorMessage = 'Location access requires HTTPS';
+      } else if (err.code === 2) {
+        errorMessage = 'Position unavailable. Check GPS.';
+      } else if (err.code === 3) {
+        errorMessage = 'Location request timed out';
+      }
       // Fallback for demo
       resolve({
         temp: 20,
         condition: "Unknown ❓",
-        location: "Location unavailable",
+        location: errorMessage,
         city: "Unknown",
         country: "Unknown",
         isCold: false

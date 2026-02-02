@@ -50,6 +50,10 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
       if (!videoRef.current || !mounted) return;
       
       try {
+        // Check if mediaDevices API is available (requires secure context)
+        if (!navigator.mediaDevices) {
+          throw new Error('Camera access requires HTTPS or localhost. Please use a secure connection.');
+        }
         const stream = await navigator.mediaDevices.getUserMedia({ 
           video: { width: 1280, height: 720 } 
         });
@@ -75,11 +79,20 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
           }
         };
         
-      } catch (error) {
+      } catch (error: any) {
         console.error('Camera initialization failed:', error);
         if (mounted) {
           setCameraReady(false);
-          setPoseError('Camera access denied. Please allow camera access.');
+          // Provide specific error messages for common issues
+          if (error.message?.includes('HTTPS') || error.message?.includes('secure')) {
+            setPoseError('Camera access requires HTTPS. Please access the site via a secure connection.');
+          } else if (error.name === 'NotAllowedError' || error.name === 'PermissionDenied') {
+            setPoseError('Camera access denied. Please allow camera permissions in your browser settings.');
+          } else if (error.name === 'NotFoundError') {
+            setPoseError('No camera found. Please connect a camera and try again.');
+          } else {
+            setPoseError('Camera access denied. Please allow camera access or use HTTPS.');
+          }
         }
       }
     };
@@ -605,7 +618,7 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
                   : 'bg-white text-black hover:scale-110 active:scale-95 cursor-pointer'
               }`}
             >
-              {isPoseLoading ? 'Loading Pose...' : (!cameraReady ? 'Loading Camera...' : t.start)}
+              {isPoseLoading ? 'Please Wait...' : (!cameraReady ? 'Please Wait...' : t.start)}
             </button>
         </div>
       )}
