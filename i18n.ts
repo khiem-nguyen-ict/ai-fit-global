@@ -37,7 +37,8 @@ export const translations = {
     milestone15: "Fifteen! Incredible!",
     milestone20: "Twenty reps! You're a champion!",
     milestone25: "Twenty-five! Unstoppable!",
-    workoutStart: "Let's go! Start your workout!"
+    workoutStart: "Let's go! Start your workout!",
+    tooClose: "Too Close!"
   },
   [Language.VI]: {
     welcome: "AI-Fit Toàn Cầu",
@@ -74,7 +75,8 @@ export const translations = {
     milestone15: "Mười lăm! Tuyệt vời!",
     milestone20: "Hai mươi lần! Bạn là nhà vô địch!",
     milestone25: "Hai mươi lăm! Không thể ngăn cản!",
-    workoutStart: "Bắt đầu tập thôi!"
+    workoutStart: "Bắt đầu tập thôi!",
+    tooClose: "Quá Gần!"
   },
   [Language.FI]: {
     welcome: "AI-Fit Globaali",
@@ -111,6 +113,7 @@ export const translations = {
     milestone15: "Viisitoista! Uskomatonta!",
     milestone20: "Kaksikymmentä toistoa! Olet mestari!",
     milestone25: "Kaksikymmentäviisi! Pysäyttämätön!",
-    workoutStart: "Mennään! Aloita treeni!"
+    workoutStart: "Mennään! Aloita treeni!",
+    tooClose: "Liian Lähellä!"
   }
 };

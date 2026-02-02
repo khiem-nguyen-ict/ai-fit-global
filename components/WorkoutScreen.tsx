@@ -3,7 +3,8 @@ import {
   calculateAngle, 
   SQUAT_DOWN_THRESHOLD, SQUAT_UP_THRESHOLD,
   PUSHUP_DOWN_THRESHOLD, PUSHUP_UP_THRESHOLD,
-  LUNGE_DOWN_THRESHOLD, LUNGE_UP_THRESHOLD
+  LUNGE_DOWN_THRESHOLD, LUNGE_UP_THRESHOLD,
+  isUserTooClose
 } from '../services/poseService';
 import { speak, initSpeech, createSpeechRecognition } from '../services/speechService';
 import { translations } from '../i18n';
@@ -32,6 +33,7 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
   const [isPoseLoading, setIsPoseLoading] = useState(true);
   const [poseError, setPoseError] = useState<string | null>(null);
   const [cameraReady, setCameraReady] = useState(false);
+  const [userTooClose, setUserTooClose] = useState(false);
   
   const [workout, setWorkout] = useState<WorkoutState>({
     reps: 0,
@@ -361,6 +363,25 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
       // @ts-ignore
       window.drawLandmarks(canvasCtx, results.poseLandmarks, { color: '#FF00A8', lineWidth: 3, radius: 6 });
 
+      // Check if user is too close to camera
+      const frameWidth = canvasRef.current.width;
+      const frameHeight = canvasRef.current.height;
+      const tooClose = isUserTooClose(results.poseLandmarks, frameWidth, frameHeight);
+      setUserTooClose(tooClose);
+
+      // If user is too close, don't count reps and show feedback
+      if (tooClose) {
+        setWorkout(prev => {
+          if (prev.lastFeedback !== t.tooClose) {
+            speak(t.tooClose, lang);
+            return { ...prev, status: 'INIT', lastFeedback: t.tooClose };
+          }
+          return prev;
+        });
+        canvasCtx.restore();
+        return;
+      }
+
       let angle = 180;
       let downThresh = 0;
       let upThresh = 180;
@@ -433,7 +454,7 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
       });
     }
     canvasCtx.restore();
-  }, [lang, t, exercise]);
+  }, [lang, t, exercise, userTooClose]);
 
   useEffect(() => {
     if (!isActive || !poseRef.current || !videoRef.current) return;
@@ -625,12 +646,27 @@ const WorkoutScreen: React.FC<WorkoutScreenProps> = ({ lang, exercise, onExercis
 
       {/* Rep Count Overlay */}
       {isActive && (
-        <RepDisplay 
-          count={workout.reps} 
-          status={workout.status} 
-          label={t.reps} 
-          statusLabel={t.status}
-        />
+        <>
+          <RepDisplay 
+            count={workout.reps} 
+            status={workout.status} 
+            label={t.reps} 
+            statusLabel={t.status}
+          />
+          
+          {/* Too Close Warning Overlay */}
+          {userTooClose && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm z-40">
+              <div className="bg-red-600/90 backdrop-blur-md px-8 py-6 rounded-2xl border-4 border-red-400 shadow-2xl animate-pulse">
+                <p className="text-4xl font-black text-white uppercase tracking-wider mb-2">⚠️ {t.tooClose}
+                </p>
+                <p className="text-lg font-bold text-white/80 mt-3 uppercase tracking-wide text-center">
+                  Step back to fit your whole body in frame
+                </p>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
