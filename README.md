@@ -210,10 +210,6 @@ Weather integration:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
-
-This project is private and proprietary.
-
 ## 🙏 Acknowledgments
 
 - [MediaPipe](https://mediapipe.dev/) for pose detection
